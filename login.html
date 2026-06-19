@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>系统登录 - 用户管理后台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        body {
+            background: linear-gradient(-45deg, #0f172a, #1e293b, #334155, #0f172a);
+            background-size: 400% 400%;
+            animation: bgMove 12s ease infinite;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        @keyframes bgMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .login-card {
+            width: 440px;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: 48px;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+        }
+        .login-title {
+            text-align: center;
+            font-size: 28px;
+            color: #f1f5f9;
+            margin-bottom: 32px;
+            text-shadow: 0 0 10px rgba(56,189,248,0.4);
+        }
+        .tip-box {
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 22px;
+            display: none;
+        }
+        .error-tip {
+            background: rgba(248,113,113,0.2);
+            color: #fda4af;
+            border:1px solid rgba(248,113,113,0.3);
+        }
+        .item {
+            margin-bottom: 24px;
+        }
+        label {
+            display: block;
+            margin-bottom: 9px;
+            color: #cbd5e1;
+            font-size: 15px;
+        }
+        input {
+            width: 100%;
+            height: 48px;
+            padding: 0 16px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 10px;
+            font-size: 15px;
+            color:#fff;
+            transition: all 0.3s;
+        }
+        input::placeholder{
+            color:#94a3b8;
+        }
+        input:focus {
+            outline: none;
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+        }
+        .login-btn {
+            width: 100%;
+            height: 50px;
+            background: linear-gradient(90deg,#2563eb,#38bdf8);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .login-btn:hover {
+            box-shadow:0 0 15px rgba(56,189,248,0.4);
+        }
+    </style>
+</head>
+<body>
+<div class="login-card">
+    <h2 class="login-title">用户信息管理后台</h2>
+    <div class="tip-box error-tip" th:if="${tip}" th:text="${tip}" style="display:block"></div>
+    <form action="LoginServlet" method="post">
+        <div class="item">
+            <label>用户名</label>
+            <input type="text" name="username" placeholder="请输入用户名" required>
+        </div>
+        <div class="item">
+            <label>登录密码</label>
+            <input type="password" name="userpsw" placeholder="请输入密码" required>
+        </div>
+        <button class="login-btn" type="submit">立即登录</button>
+    </form>
+</div>
+</body>
+</html>
