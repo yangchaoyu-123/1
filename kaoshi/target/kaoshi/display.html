@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户管理列表 - 后台系统</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        body {
+            background: linear-gradient(-45deg, #0f172a, #1e293b, #334155, #0f172a);
+            background-size: 400% 400%;
+            animation: bgMove 12s ease infinite;
+            min-height:100vh;
+            padding: 40px 20px;
+        }
+        @keyframes bgMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 26px;
+        }
+        h1 {
+            color: #f1f5f9;
+            font-size: 26px;
+            text-shadow:0 0 8px rgba(56,189,248,0.3);
+        }
+        .btn-group a {
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-left: 12px;
+            transition: 0.3s;
+        }
+        .add {
+            background: linear-gradient(90deg,#059669,#34d399);
+            color: white;
+        }
+        .logout {
+            background: linear-gradient(90deg,#dc2626,#f87171);
+            color: white;
+        }
+        .btn-group a:hover{
+            transform: translateY(-3px);
+            box-shadow:0 6px 16px rgba(0,0,0,0.25);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255,255,255,0.07);
+            backdrop-filter: blur(10px);
+            border:1px solid rgba(255,255,255,0.12);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        th,td {
+            padding: 18px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            color:#e2e8f0;
+        }
+        th {
+            background: rgba(37,99,235,0.25);
+            color: #ffffff;
+        }
+        tr:hover td {
+            background: rgba(255,255,255,0.09);
+        }
+        .op a {
+            text-decoration: none;
+            padding: 7px 14px;
+            border-radius: 8px;
+            color: white;
+            margin: 0 6px;
+            font-size:14px;
+            transition:0.2s;
+        }
+        .op a:hover{
+            transform: translateY(-2px);
+        }
+        .del {
+            background:#ef4444;
+        }
+        .edit {
+            background:#2563eb;
+        }
+        .back-home {
+            display: block;
+            text-align: center;
+            margin-top:28px;
+            color:#94a3b8;
+            text-decoration:none;
+            font-size:15px;
+        }
+        .back-home:hover{
+            color:#38bdf8;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>用户信息管理列表</h1>
+        <div class="btn-group">
+            <a class="add" href="addUser.html">➕ 添加用户</a>
+            <a class="logout" href="LogoutServlet" onclick="return confirm('确认退出登录？')">🚪 退出登录</a>
+        </div>
+    </div>
+    <table>
+        <tr>
+            <th>编号ID</th>
+            <th>用户名</th>
+            <th>登录密码</th>
+            <th>操作</th>
+        </tr>
+        <tr th:each="user : ${ulist}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.userpsw}"></td>
+            <td class="op">
+                <a class="edit" th:href="@{/FindUserServlet(id=${user.id})}">修改</a>
+                <a class="del" th:href="@{/DeleteUserServlet(id=${user.id})}" onclick="return confirm('确定删除该用户？')">删除</a>
+            </td>
+        </tr>
+    </table>
+    <a class="back-home" href="index.jsp">← 返回系统首页</a>
+</div>
+</body>
+</html>
